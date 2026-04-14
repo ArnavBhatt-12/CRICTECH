@@ -10,3 +10,122 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+ 
+  <!-- ══ NAVBAR ══ -->
+  <nav>
+    <div class="logo" onclick="goHome()">🏏 Cric<span>Tech</span></div>
+    <button class="back-btn" id="backBtn" onclick="goBack()">← Back</button>
+    <ul class="nav-links">
+      <li><a onclick="goHome()">Home</a></li>
+      <li><a onclick="gotoResults()">Compare</a></li>
+      <li><a onclick="showPage('comparison')">All Deals</a></li>
+    </ul>
+  </nav>
+ 
+  <!-- ══ HOME ══ -->
+  <div class="page active" id="page-home">
+    <div class="hero-glow"></div>
+    <p class="hero-eyebrow">🇮🇳 India's #1 Cricket Bat Price Aggregator</p>
+    <h1 class="hero-title">Find Your<br /><em>Perfect</em><br />Bat.</h1>
+    <p class="hero-sub">Compare prices across Amazon, Flipkart &amp; brand websites — always find the best deal.</p>
+ 
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-input" id="mainSearch" type="text"
+        placeholder="Search bats… or tap 🎙️ to speak" autocomplete="off" />
+      <button class="voice-btn" id="voiceBtn" onclick="toggleVoice()" title="Voice search">🎙️</button>
+      <button class="search-btn" onclick="doSearch()">Search</button>
+      <div class="suggestions" id="suggestions"></div>
+    </div>
+ 
+    <div class="stats-row">
+      <div class="stat"><div class="stat-num">30</div><div class="stat-label">Bats Listed</div></div>
+      <div class="stat"><div class="stat-num">11</div><div class="stat-label">Brands</div></div>
+      <div class="stat"><div class="stat-num">3</div><div class="stat-label">Platforms</div></div>
+    </div>
+  </div>
+ 
+  <!-- ══ TRENDING ══ -->
+  <div id="page-trending" class="page active">
+    <div class="divider"></div>
+    <div class="section-wrap">
+      <div class="section-header">
+        <h2 class="section-title">🔥 Trending <span>Bats</span></h2>
+        <span class="see-all" onclick="gotoResults()">Compare All 30 →</span>
+      </div>
+      <div class="trending-grid" id="trendingGrid"></div>
+    </div>
+  </div>
+ 
+  <!-- ══ RESULTS ══ -->
+  <div class="page" id="page-results">
+    <div class="section-wrap">
+      <div class="section-header">
+        <h2 class="section-title">Search <span>Results</span></h2>
+        <span class="see-all" onclick="showPage('comparison')">Table View →</span>
+      </div>
+      <div class="filters-bar">
+        <div class="filter-group">
+          <label>Brand</label>
+          <select id="filterBrand" onchange="applyFilters()">
+            <option value="">All Brands</option>
+            <option>MRF</option><option>SS</option><option>SG</option>
+            <option>Kookaburra</option><option>GM</option><option>BAS</option>
+            <option>Puma</option><option>Adidas</option><option>Spartan</option>
+            <option>Gray-Nicolls</option><option>Chase</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Type</label>
+          <select id="filterType" onchange="applyFilters()">
+            <option value="">All Types</option>
+            <option>English Willow</option>
+            <option>Kashmir Willow</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Max ₹</label>
+          <div class="price-range-wrap">
+            <input type="range" id="priceRange" min="1000" max="20000"
+              value="20000" step="500"
+              oninput="updatePrice(this.value); applyFilters()" />
+            <span class="price-val" id="priceDisplay">₹20,000</span>
+          </div>
+        </div>
+      </div>
+      <div class="results-grid" id="resultsGrid"></div>
+    </div>
+  </div>
+ 
+  <!-- ══ COMPARISON TABLE ══ -->
+  <div class="page" id="page-comparison">
+    <div class="section-wrap">
+      <div class="section-header">
+        <h2 class="section-title">Full <span>Comparison</span></h2>
+        <span class="see-all" onclick="showPage('results')">Card View →</span>
+      </div>
+      <div class="comp-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Bat</th>
+              <th>Type</th>
+              <th>🛒 Amazon</th>
+              <th>🛒 Flipkart</th>
+              <th>🏷️ Brand Site</th>
+              <th>Best Deal</th>
+            </tr>
+          </thead>
+          <tbody id="compBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="toast" id="toast"></div>
+ 
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
+ 
